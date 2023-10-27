@@ -7,14 +7,29 @@
 
 import UIKit
 
-class TabBarController: UITabBar {
+@main
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let contactListViewController = ContactListViewController()
+        let secondTableViewController = SecondTableViewController()
+
+        let contactsNavigationController = UINavigationController(rootViewController: contactListViewController)
+        let secondTableNavigationController = UINavigationController(rootViewController: secondTableViewController)
+
+        contactsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        secondTableNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [contactsNavigationController, secondTableNavigationController]
+
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
+        return true
     }
-    */
-
 }
